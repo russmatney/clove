@@ -1,8 +1,17 @@
 #+title: Clove
 
-Successor to russmatney/clover, but dropping Electron in favor of Tauri.
+Successor to [[https://github.com/russmatney/clover][russmatney/clover]], but dropping Electron in favor of Tauri.
 
-Builds a binary that can be passed a window title and URL.
+Builds a binary that can be passed a window title and URL, to host a locally
+running web app outside of your usual browser tabs.
+
+I use this in [[https://github.com/russmatney/clawe][russmatney/clawe]] to run a clojurescript topbar on linux and OSX,
+as well as a dedicated place to run [[https://github.com/nextjournal/clerk][clerk]] notebooks.
+
+More detail on my blog:
+
+- [[https://danger.russmatney.com/daily/2022-10-18.html][2022-10-18 daily note]]
+- [[https://danger.russmatney.com/note/tauri_as_a_simple_native_web_view.html][Tauri as a simple native webview]]
 
 * Dev
 Build:
@@ -33,6 +42,13 @@ Build prod and install it in ~/.cargo/bin:
 cargo install --path src-tauri/.
 #+end_src
 * Usage
+
 #+begin_src sh
 clove create-window --title some-window-title --url http://localhost:3333 --label some-unique-label
+#+end_src
+
+Eg at default clerk port:
+
+#+begin_src sh
+clove create-window --title clerk-notebook --url http://localhost:8888 --label clerk-notebook
 #+end_src
