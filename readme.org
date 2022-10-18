@@ -3,3 +3,36 @@
 Successor to russmatney/clover, but dropping Electron in favor of Tauri.
 
 Builds a binary that can be passed a window title and URL.
+
+* Dev
+Build:
+
+#+begin_src sh
+cargo tauri dev
+#+end_src
+
+Test:
+
+#+begin_src sh
+./src-tauri/target/debug/clove create-window -t mytitle --url http://localhost:3333 --label mylabel
+#+end_src
+* 'Prod'
+#+begin_src sh
+cargo tauri build
+#+end_src
+
+Test the prod build:
+
+#+begin_src sh
+./src-tauri/target/release/clove create-window -t mytitle --url http://localhost:3333 --label mylabel
+#+end_src
+* install
+Build prod and install it in ~/.cargo/bin:
+
+#+begin_src sh
+cargo install --path src-tauri/.
+#+end_src
+* Usage
+#+begin_src sh
+clove create-window --title some-window-title --url http://localhost:3333 --label some-unique-label
+#+end_src
