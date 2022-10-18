@@ -47,20 +47,37 @@
         "timestampUrl": ""
       }
     },
+    "cli": {
+      "description": "Clove CLI",
+      "args": [],
+      "subcommands": {
+        "create-window": {
+          "args": [
+            {
+              "name": "label",
+              "short": "l",
+              "takesValue": true
+            },
+            {
+              "name": "title",
+              "short": "t",
+              "takesValue": true
+            },
+            {
+              "name": "url",
+              "short": "u",
+              "takesValue": true
+            }
+          ]
+        }
+      }
+    },
     "security": {
       "csp": null
     },
     "updater": {
       "active": false
     },
-    "windows": [
-      {
-        "fullscreen": false,
-        "height": 600,
-        "resizable": true,
-        "title": "clove",
-        "width": 800
-      }
-    ]
+    "windows": []
   }
 }

@@ -3,15 +3,42 @@
     windows_subsystem = "windows"
 )]
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
+use url::Url;
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
+        .setup(|app| {
+            match app.get_cli_matches() {
+                Ok(matches) => match matches.subcommand {
+                    Some(subcom) => match subcom.name.as_str() {
+                        "create-window" => {
+                            let title = &subcom.matches.args.get("title").clone().unwrap().value;
+                            let label = &subcom.matches.args.get("label").clone().unwrap().value;
+                            let url = &subcom.matches.args.get("url").clone().unwrap().value;
+                            println!("title {:?}", title);
+                            println!("url {:?}", url);
+                            println!("label {:?}", label);
+
+                            let proper_url = Url::parse(&url.as_str().unwrap()).unwrap();
+
+                            tauri::WindowBuilder::new(
+                                app,
+                                label.as_str().unwrap(),
+                                tauri::WindowUrl::External(proper_url),
+                            )
+                            .build()?;
+                        }
+                        _ => println!(
+                            "No matching subcommand found. (Did you mean 'create-window'?)"
+                        ),
+                    },
+                    _ => println!("No subcommand passed. (Did you mean 'create-window'?)"),
+                },
+                Err(_) => {}
+            }
+
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
