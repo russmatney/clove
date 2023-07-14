@@ -30,6 +30,7 @@ fn main() {
                             .resizable(true)
                             .visible(true)
                             .transparent(true)
+                            .title_bar_style(tauri::TitleBarStyle::Transparent)
                             // TODO support this as an option
                             // .decorations(false)
                             .position(0.0, 0.0)
