@@ -34,6 +34,8 @@ fn main() {
                             // TODO support this as an option
                             // .decorations(false)
                             .position(0.0, 0.0)
+                            // TODO parse 'focus' from cli args
+                            .focus(false)
                             .inner_size(800.0, 800.0)
                             .build()?;
                         }
