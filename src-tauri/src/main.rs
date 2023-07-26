@@ -12,12 +12,42 @@ fn main() {
                 Ok(matches) => match matches.subcommand {
                     Some(subcom) => match subcom.name.as_str() {
                         "create-window" => {
+                            println!("matches {:?}", subcom.matches);
+
                             let title = &subcom.matches.args.get("title").clone().unwrap().value;
                             let label = &subcom.matches.args.get("label").clone().unwrap().value;
                             let url = &subcom.matches.args.get("url").clone().unwrap().value;
+                            let focused = &subcom
+                                .matches
+                                .args
+                                .get("focused")
+                                .clone()
+                                .unwrap()
+                                .value
+                                .as_bool();
+                            let transparent = &subcom
+                                .matches
+                                .args
+                                .get("transparent")
+                                .clone()
+                                .unwrap()
+                                .value
+                                .as_bool();
+                            let decorations = &subcom
+                                .matches
+                                .args
+                                .get("decorations")
+                                .clone()
+                                .unwrap()
+                                .value
+                                .as_bool();
+
                             println!("title {:?}", title);
-                            println!("url {:?}", url);
                             println!("label {:?}", label);
+                            println!("url {:?}", url);
+                            println!("focused {:?}", focused);
+                            println!("transparent {:?}", transparent);
+                            println!("decorations {:?}", decorations);
 
                             let proper_url = Url::parse(&url.as_str().unwrap()).unwrap();
 
@@ -29,13 +59,11 @@ fn main() {
                             .title(title.as_str().unwrap())
                             .resizable(true)
                             .visible(true)
-                            .transparent(true)
-                            .title_bar_style(tauri::TitleBarStyle::Transparent)
-                            // TODO support this as an option
-                            // .decorations(false)
+                            .transparent(transparent.unwrap())
+                            // .title_bar_style(tauri::TitleBarStyle::Transparent)
+                            .decorations(decorations.unwrap())
                             .position(0.0, 0.0)
-                            // TODO parse 'focus' from cli args
-                            .focus(false)
+                            .focused(focused.unwrap())
                             .inner_size(800.0, 800.0)
                             .build()?;
                         }
@@ -45,7 +73,7 @@ fn main() {
                     },
                     _ => println!("No subcommand passed. (Did you mean 'create-window'?)"),
                 },
-                Err(_) => {}
+                Err(e) => println!("{}", e),
             }
 
             Ok(())

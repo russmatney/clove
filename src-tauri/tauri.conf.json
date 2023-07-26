@@ -57,17 +57,38 @@
             {
               "name": "label",
               "short": "l",
-              "takesValue": true
+              "takesValue": true,
+              "description": "The window label for the created window."
             },
             {
               "name": "title",
               "short": "t",
-              "takesValue": true
+              "takesValue": true,
+              "required": true,
+              "description": "The title for the created window. Matched on from WM programs."
             },
             {
               "name": "url",
               "short": "u",
-              "takesValue": true
+              "takesValue": true,
+              "required": true,
+              "description": "The url to be visited by the web view."
+            },
+            {
+              "name": "decorations",
+              "short": "d",
+              "description": "Flag for including borders and bars, including buttons on OSX.",
+              "longDescription": "Note that OSX buttons are required to close windows :/"
+            },
+            {
+              "name": "focused",
+              "short": "f",
+              "description": "If passed, the created window will grab focus."
+            },
+            {
+              "name": "transparent",
+              "short": "i",
+              "description": "If passed, the created window will support transparency."
             }
           ]
         }
