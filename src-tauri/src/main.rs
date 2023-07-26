@@ -4,6 +4,8 @@
 )]
 
 use url::Url;
+// use std::path::PathBuf;
+// use tauri::Icon;
 
 fn main() {
     tauri::Builder::default()
@@ -17,6 +19,7 @@ fn main() {
                             let title = &subcom.matches.args.get("title").clone().unwrap().value;
                             let label = &subcom.matches.args.get("label").clone().unwrap().value;
                             let url = &subcom.matches.args.get("url").clone().unwrap().value;
+                            let icon_path = &subcom.matches.args.get("icon").clone().unwrap().value;
                             let focused = &subcom
                                 .matches
                                 .args
@@ -45,6 +48,7 @@ fn main() {
                             println!("title {:?}", title);
                             println!("label {:?}", label);
                             println!("url {:?}", url);
+                            println!("icon_path {:?}", icon_path);
                             println!("focused {:?}", focused);
                             println!("transparent {:?}", transparent);
                             println!("decorations {:?}", decorations);
@@ -66,6 +70,25 @@ fn main() {
                             .focused(focused.unwrap())
                             .inner_size(800.0, 800.0)
                             .build()?;
+
+                            // match icon_path.as_str() {
+                            //     Some(path) => {
+                            //         let i = Icon::File(PathBuf::from(path));
+                            //         match win.icon(i) {
+                            //             Ok(w) => {
+                            //                 println!("Icon set.");
+                            //             }
+                            //             Err(e) => {
+                            //                 println!("Error setting icon {}", e);
+                            //             }
+                            //         }
+                            //     }
+                            //     _ => {
+                            //         println!("Icon path could not be unwrapped.");
+                            //     }
+                            // };
+
+
                         }
                         _ => println!(
                             "No matching subcommand found. (Did you mean 'create-window'?)"

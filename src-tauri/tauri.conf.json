@@ -87,8 +87,14 @@
             },
             {
               "name": "transparent",
-              "short": "i",
+              "short": "a",
               "description": "If passed, the created window will support transparency."
+            },
+            {
+              "name": "icon",
+              "short": "i",
+              "takesValue": true,
+              "description": "An absolute path to an icon"
             }
           ]
         }
