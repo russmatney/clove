@@ -16,7 +16,7 @@ tauri-build = { version = "1.4", features = [] }
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.4", features = ["api-all", "cli", "macos-private-api", "icon-png"] }
+tauri = { version = "1.4", features = ["api-all", "cli", "icon-png", "macos-private-api"] }
 url = "2.3.1"
 
 [features]

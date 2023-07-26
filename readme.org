@@ -44,11 +44,29 @@ cargo install --path src-tauri/.
 * Usage
 
 #+begin_src sh
-clove create-window --title some-window-title --url http://localhost:3333 --label some-unique-label
+clove create-window \
+    --title some-window-title \
+    --url http://localhost:3333 \
+    --label some-unique-label
 #+end_src
 
 Eg at default clerk port:
 
 #+begin_src sh
-clove create-window --title clerk-notebook --url http://localhost:8888 --label clerk-notebook
+clove create-window \
+    --title clerk-notebook \
+    --url http://localhost:8888 \
+    --label clerk-notebook
+#+end_src
+
+With more args:
+
+#+begin_src sh
+clove create-window \
+    --transparent \
+    --decorations \
+    --focused \
+    --title clerk-notebook \
+    --url http://localhost:8888 \
+    --label clerk-notebook
 #+end_src
