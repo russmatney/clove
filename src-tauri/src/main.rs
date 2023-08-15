@@ -4,8 +4,8 @@
 )]
 
 use url::Url;
-// use std::path::PathBuf;
-// use tauri::Icon;
+use std::path::PathBuf;
+use tauri::Icon;
 
 fn main() {
     tauri::Builder::default()
@@ -55,7 +55,7 @@ fn main() {
 
                             let proper_url = Url::parse(&url.as_str().unwrap()).unwrap();
 
-                            tauri::WindowBuilder::new(
+                            let mut win = tauri::WindowBuilder::new(
                                 app,
                                 label.as_str().unwrap(),
                                 tauri::WindowUrl::External(proper_url),
@@ -68,26 +68,17 @@ fn main() {
                             .decorations(decorations.unwrap())
                             .position(0.0, 0.0)
                             .focused(focused.unwrap())
-                            .inner_size(800.0, 800.0)
-                            .build()?;
+                            .inner_size(800.0, 800.0);
 
-                            // match icon_path.as_str() {
-                            //     Some(path) => {
-                            //         let i = Icon::File(PathBuf::from(path));
-                            //         match win.icon(i) {
-                            //             Ok(w) => {
-                            //                 println!("Icon set.");
-                            //             }
-                            //             Err(e) => {
-                            //                 println!("Error setting icon {}", e);
-                            //             }
-                            //         }
-                            //     }
-                            //     _ => {
-                            //         println!("Icon path could not be unwrapped.");
-                            //     }
-                            // };
+                            win = match icon_path.as_str() {
+                                Some(path) => {
+                                    let i = Icon::File(PathBuf::from(path));
+                                    win.icon(i)?
+                                }
+                                _ => win
+                            };
 
+                            win.build()?;
 
                         }
                         _ => println!(
