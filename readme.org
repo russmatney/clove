@@ -70,3 +70,24 @@ clove create-window \
     --url http://localhost:8888 \
     --label clerk-notebook
 #+end_src
+* misc
+** nvidia error
+There is a crash when running tauri against the latest nvidia renderers:
+
+#+begin_src sh
+src/nv_gbm.c:99: GBM-DRV error (nv_gbm_bo_create): DRM_IOCTL_NVIDIA_GEM_ALLOC_NVKMS_MEMORY failed (ret=-1)
+
+Failed to create GBM buffer of size 2279x999: Invalid argument
+#+end_src
+
+For now using an env var makes things work again:
+
+#+begin_src sh
+WEBKIT_DISABLE_DMABUF_RENDERER=1 clove create-window ....
+#+end_src
+
+Some related threads:
+
+- https://github.com/tauri-apps/tauri/issues/7910
+- https://www.reddit.com/r/rust/comments/16tzu8w/tauri_issue/
+- https://www.reddit.com/r/tauri/comments/16tzsi8/tauri_desktop_app_not_rendering_but_web_does/
