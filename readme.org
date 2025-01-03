@@ -15,6 +15,7 @@ More detail on my blog:
 * updating
 things like
 #+begin_src
+rustup update
 yarn global upgrade @tauri-apps/cli@latest
 tauri migrate
 cargo update # in src-tauri/
@@ -26,7 +27,10 @@ tauri dev
 ~tauri dev~ with commands fails lately b/c `dev` adds extra command line args
 that tauri-plugin-cli doesn't support :eyeroll:
 
+~tauri dev~ on mac currently fails completely, dep resolution fail for hyper-tls?
+
 migration from tauri 1 guide: https://v2.tauri.app/start/migrate/from-tauri-1/
+
 
 * Dev
 Build:
