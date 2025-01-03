@@ -5,13 +5,28 @@ Successor to [[https://github.com/russmatney/clover][russmatney/clover]], but dr
 Builds a binary that can be passed a window title and URL, to host a locally
 running web app outside of your usual browser tabs.
 
-I use this in [[https://github.com/russmatney/clawe][russmatney/clawe]] to run a clojurescript topbar on linux and OSX,
-as well as a dedicated place to run [[https://github.com/nextjournal/clerk][clerk]] notebooks.
+I use this in [[https://github.com/russmatney/clawe][russmatney/clawe]] to run a clojurescript topbar and dashboard on linux and OSX.
 
 More detail on my blog:
 
 - [[https://danger.russmatney.com/daily/2022-10-18.html][2022-10-18 daily note]]
 - [[https://danger.russmatney.com/note/tauri_as_a_simple_native_web_view.html][Tauri as a simple native webview]]
+
+* updating
+things like
+#+begin_src
+yarn global upgrade @tauri-apps/cli@latest
+tauri migrate
+cargo update # in src-tauri/
+tauri dev
+
+./src-tauri/target/debug/clove create-window -t mytitle --url http://localhost:3333 --label mylabel
+#+end_src
+
+~tauri dev~ with commands fails lately b/c `dev` adds extra command line args
+that tauri-plugin-cli doesn't support :eyeroll:
+
+migration from tauri 1 guide: https://v2.tauri.app/start/migrate/from-tauri-1/
 
 * Dev
 Build:
@@ -27,8 +42,10 @@ Test:
 #+end_src
 * 'Prod'
 #+begin_src sh
-cargo tauri build
+NO_STRIP=true cargo tauri build
 #+end_src
+
+~NO_STRIP=true~ from https://github.com/tauri-apps/tauri/issues/8929
 
 Test the prod build:
 
@@ -91,3 +108,5 @@ Some related threads:
 - https://github.com/tauri-apps/tauri/issues/7910
 - https://www.reddit.com/r/rust/comments/16tzu8w/tauri_issue/
 - https://www.reddit.com/r/tauri/comments/16tzsi8/tauri_desktop_app_not_rendering_but_web_does/
+** linuxdeploy fail
+add ~NO_STRIP=true~ (from: https://github.com/tauri-apps/tauri/issues/8929 )
